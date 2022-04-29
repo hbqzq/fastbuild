@@ -34,8 +34,8 @@ namespace Protocol
     enum : uint32_t { PROTOCOL_VERSION_MAJOR = 22 };    // Changes here make workers incompatible
     enum : uint8_t  { PROTOCOL_VERSION_MINOR = 1 };     // Changes must be forwards and backwards compatible
 
-    enum { PROTOCOL_TEST_PORT = PROTOCOL_PORT + 1 }; // Different port for use by tests
-    enum { COORDINATOR_PORT = PROTOCOL_PORT + 128 }; // Different port for use by tests
+    enum : uint16_t { PROTOCOL_TEST_PORT = PROTOCOL_PORT + 1 }; // Different port for use by tests
+    enum : uint16_t { COORDINATOR_PORT = PROTOCOL_PORT + 128 }; // Different port for use by tests
 
     // Identifiers for all unique messages
     //------------------------------------------------------------------------------
@@ -57,8 +57,8 @@ namespace Protocol
         MSG_FILE                = 10,// Server <- Client : Send a requested file
 
         MSG_REQUEST_WORKER_LIST = 11,// Client -> Coordinator : Ask coordinator for the list of workers
-        MSG_WORKER_LIST = 12,// Client <- Coordinator : Respond with the list of workers
-        MSG_SET_WORKER_STATUS = 13,// Server -> Coordinator : Sets worker status (available or unavailable)
+        MSG_WORKER_LIST         = 12,// Client <- Coordinator : Respond with the list of workers
+        MSG_SET_WORKER_STATUS   = 13,// Server -> Coordinator : Sets worker status (available or unavailable)
 
         MSG_JOB_RESULT_COMPRESSED   = 14, // Server -> Client : Return completed job (compressed)
 
