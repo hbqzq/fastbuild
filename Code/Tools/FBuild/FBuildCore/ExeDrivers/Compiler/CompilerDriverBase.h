@@ -61,7 +61,7 @@ public:
                                                           Args & outFullArgs ) const;
     virtual void AddAdditionalArgs_PreparePreprocessedForRemote( Args & outFullArgs );
 
-protected:
+
     static bool StripTokenWithArg( const char * tokenToCheckFor,
                                    const AString & token,
                                    size_t & index );
@@ -69,6 +69,7 @@ protected:
                             const AString & token,
                             bool allowStartsWith = false );
 
+protected:
     const ObjectNode *  m_ObjectNode                = nullptr;
     bool                m_ForceColoredDiagnostics   = false;
     AString             m_SourceMapping;
