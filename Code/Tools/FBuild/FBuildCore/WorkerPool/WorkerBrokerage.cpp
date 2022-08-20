@@ -43,6 +43,7 @@ WorkerBrokerage::WorkerBrokerage()
     , m_Connection(nullptr)
     , m_SettingsWriteTime(0)
     , m_WorkerListUpdateReady(false)
+    , m_AlwaysUseHostName(false)
 {
 }
 
@@ -55,6 +56,12 @@ void WorkerBrokerage::InitBrokerage()
     if (m_BrokerageInitialized)
     {
         return;
+    }
+
+    AStackString<> alwaysUseHostnameStr;
+    if (Env::GetEnvVariable("FASTBUILD_WORKER_ALWAYS_USE_HOSTNAME", alwaysUseHostnameStr))
+    {
+        m_AlwaysUseHostName = alwaysUseHostnameStr == "true" || alwaysUseHostnameStr == "1";
     }
 
     Network::GetHostName(m_HostName);
@@ -469,7 +476,7 @@ void WorkerBrokerage::UpdateBrokerageFilePath()
 {
     if (!m_BrokerageRoots.IsEmpty())
     {
-        if (!m_IPAddress.IsEmpty())
+        if (!m_IPAddress.IsEmpty() && !m_AlwaysUseHostName)
         {
             m_BrokerageFilePath.Format("%s%s", m_BrokerageRoots[0].Get(), m_IPAddress.Get());
         }

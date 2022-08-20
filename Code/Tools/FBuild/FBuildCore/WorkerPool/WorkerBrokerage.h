@@ -55,6 +55,7 @@ private:
     Timer               m_TimerLastCleanBroker;
     Array< uint32_t >   m_WorkerListUpdate;
     bool                m_WorkerListUpdateReady;
+    bool                m_AlwaysUseHostName;
 };
 
 //------------------------------------------------------------------------------
